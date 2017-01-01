@@ -22,6 +22,17 @@ http://www.exp-tech.de/12mm-diffused-flat-digital-rgb-led-pixels-strand-of-25-ws
 bei Ebay
 http://www.ebay.de/sch/i.html?_odkw=adafruit&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR0.TRC0.H0.Xdiffused+rgb+led.TRS0&_nkw=diffused+rgb+led&_sacat=0
 
+bei Amazon
+https://www.amazon.de/WS2811-Pixels-digital-Addressable-String/dp/B00MXW054Y/ref=sr_1_4?s=kitchen&ie=UTF8&qid=1483302387&sr=1-4&keywords=WS2801
+
+Bauteile
+========
+
+WS2812B mit dem Controller WS2811 scheinen eine gute Lösung zu sein.
+
+Level-Shifter: 3V -> 5V
+https://www.adafruit.com/products/1787
+https://cdn-shop.adafruit.com/datasheets/74AHC125.pdf
 
 Händler
 =======
@@ -36,3 +47,12 @@ http://www.mikrocontroller.net/articles/Elektronikversender
 Elektronik Wunderland (Bochum)
 http://www.elektronik-wunderland.de/
 
+
+Anleitung
+=========
+
+http://www.aoakley.com/articles/2015-11-18-raspberry-pi-christmas-led-matrix.php
+https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all
+
+Lib für den Pi
+https://github.com/jgarff/rpi_ws281x
