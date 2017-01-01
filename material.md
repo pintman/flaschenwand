@@ -14,5 +14,11 @@ https://www.adafruit.com/products/420
 https://www.adafruit.com/products/322
 25 Pixel als "Lichterkette"
 
+Im Adafruit Shop leider recht hohe Versandkosten >20€.
+
+Lichterkette
+http://www.exp-tech.de/12mm-diffused-flat-digital-rgb-led-pixels-strand-of-25-ws2801
+
+
 
 
