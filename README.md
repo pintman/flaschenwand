@@ -58,3 +58,5 @@ https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all
 
 Lib für den Pi
 https://github.com/jgarff/rpi_ws281x
+
+git clone https://github.com/jgarff/rpi_ws281x.git
