@@ -25,6 +25,7 @@ http://www.ebay.de/sch/i.html?_odkw=adafruit&_osacat=0&_from=R40&_trksid=p204557
 bei Amazon
 https://www.amazon.de/WS2811-Pixels-digital-Addressable-String/dp/B00MXW054Y/ref=sr_1_4?s=kitchen&ie=UTF8&qid=1483302387&sr=1-4&keywords=WS2801
 
+
 Bauteile
 ========
 
@@ -33,6 +34,7 @@ WS2812B mit dem Controller WS2811 scheinen eine gute Lösung zu sein.
 Level-Shifter: 3V -> 5V
 https://www.adafruit.com/products/1787
 https://cdn-shop.adafruit.com/datasheets/74AHC125.pdf
+
 
 Händler
 =======
