@@ -1,7 +1,7 @@
 Falschenwand
 ============
 
-Das Projekt wurde inspiriert durch die Flaschenwand des 32C3.
+Das Projekt wurde inspiriert durch die Matewand des 32C3.
 
 http://matelight.rocks/
 
