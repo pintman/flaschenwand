@@ -68,3 +68,10 @@ Lib für den Pi
 https://github.com/jgarff/rpi_ws281x
 
 git clone https://github.com/jgarff/rpi_ws281x.git
+
+Alternativen
+============
+
+  * Phillips Hue-System: Bridge mit Birnen (ca. 150€)
+  * Osram Lightify (Controller + Birne ab ca. 60€)
+
