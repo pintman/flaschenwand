@@ -56,6 +56,9 @@ https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all
 
 Vortrag der Pi and More: [Led Matrix mit der ESP8266](https://www.youtube.com/watch?v=0Q-DeAC4_y4&list=WL&index=23)
 
+Verschiedene mögliche Probleme bzgl. HDMI und Audio des Pi werden in 
+[#104](https://github.com/jgarff/rpi_ws281x/issues/103) beschrieben.
+
 
 Alternativen
 ============
