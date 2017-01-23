@@ -71,6 +71,15 @@ Alternativen
   * Osram Lightify (Controller + Birne ab ca. 60€)
 
 
+Demo
+====
+
+Nach einer ersten Inbetriebnahme sind zwei Video entstanden.
+
+  * [Video 1](doc/VID_20170122_133600.mp4)
+  * [Video 2](doc/VID_20170122_171614.mp4)
+
+
 Anschluss
 =========
 
