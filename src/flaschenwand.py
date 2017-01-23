@@ -1,4 +1,4 @@
-# import neopixel
+import neopixel
 
 
 class Flaschenwand:
@@ -6,7 +6,9 @@ class Flaschenwand:
         self.width = width
         self.height = height
 
-        # self.strip = neopixel.Adafruit_NeoPixel(width*height, pin)
+        self.strip = neopixel.Adafruit_NeoPixel(width*height, pin)
+        self.strip.begin()
+
         self.coords = dict()
         self._init_coords()
 
@@ -36,8 +38,8 @@ class Flaschenwand:
             num += 1
 
             # update x,y coordinates
-            # 2   .-> -> -> ...
-            # 1  ^ <- <- <-.
+            # 2    -> -> -> ...
+            # 1  ^ <- <- <-
             # 0    -> -> -> ^
             if y % 2 == 0:
                 # moving  ->
@@ -45,7 +47,6 @@ class Flaschenwand:
                     x += 1
                 else:
                     y += 1
-
             else:
                 # moving  <-
                 if x - 1 >= 0:
@@ -53,5 +54,23 @@ class Flaschenwand:
                 else:
                     y += 1
 
-if __name__ == "__main__":
-    f = Flaschenwand(3,2)
+    def set_pixel(self, x, y, col):
+        """Set the pixel at the given position to the neopixel color."""
+        self.strip.setPixelColor(self.coords[(x,y)], col)
+
+    def get_pixel(self, x, y):
+        """Request the color for the pixel at (x,y)."""
+        return self.strip.getPixelColor(self.coords[(x,y)])
+
+    def set_pixel_rgb(self, x, y, r, g, b, white=0):
+        """Set the pixel at the given position to the given color value."""
+        self.set_pixel(x, y, neopixel.Color(r, g, b, white))
+
+    def set_brightness(self, brightness):
+        """Set the birghtness of all pixels. Use a value between 0 and 255."""
+        self.strip.setBrightness(brightness)
+
+    def show(self):
+        """Update the display and show the current state."""
+        self.strip.show()
+
