@@ -86,3 +86,14 @@ Anschluss
 <img src="doc/anschluss1.jpg" width="500">
 <img src="doc/anschluss2.jpg" width="500">
 
+
+Text
+====
+
+Der Font stammt von der Seite https://robey.lag.net/2010/01/23/tiny-monospace-font.html
+
+![Font 1](doc/minitfont1.png)
+
+![Font 2](doc/minifont2.png)
+
+![Font 3](doc/minifont3.png)
