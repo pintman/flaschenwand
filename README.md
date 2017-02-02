@@ -63,6 +63,10 @@ es mit dem PWM-Pin konkurriert. Die erfolgt duch
 
     $ echo "blacklist snd_bcm2835" >> /etc/modprobe.d/raspi-blacklist.conf"
 
+Das Projekt acab des Münchener CCC stellt in seinem 
+[Repo](https://github.com/muccc/acab-streetlife?files=1) verschiedene Demos 
+bereit.
+
 
 Alternativen
 ============
