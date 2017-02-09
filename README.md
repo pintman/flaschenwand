@@ -74,6 +74,12 @@ Alternativen
   * Phillips Hue-System: Bridge mit Birnen (ca. 150€)
   * Osram Lightify (Controller + Birne ab ca. 60€)
 
+Das Projekt ACAB (all colors are beautiful) könnte mit anderen Boxen 
+nachgebaut werden:
+
+  * [Tedi Schubladenturm (10€)](http://www.tedi-shop.com/home-haushalt/aufbewahrung/schubladenturm.html)
+
+
 
 Demo
 ====
