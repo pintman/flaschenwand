@@ -88,14 +88,14 @@ Nach einer ersten Inbetriebnahme sind zwei Video entstanden.
 
   * [Video 1](doc/VID_20170122_133600.mp4) - kleiner Strip
   * [Video 2](doc/VID_20170122_171614.mp4) - Lichterkette
-
+  * [Video 3](doc/flaschen_in_kiste.mp4) - Flaschen in Kiste
 
 Anschluss
 =========
 
 <img src="doc/anschluss1.jpg" width="500">
 <img src="doc/anschluss2.jpg" width="500">
-
+<img src="doc/flaschen_in_kiste.jpg" width="500">
 
 Text
 ====
