@@ -100,7 +100,7 @@ Anschluss an den Pi und den Level-Shifter.
 
 Die LED werden in den Flaschen versenkt. Wichtig ist der korrekte
 Abstand der Öffnungen - in diesem Fall dürfen 7cm nicht überschritten
-werden. Die einzelnen LED werden mir einer Büroklammer fixiert, damit
+werden. Die einzelnen LED werden mit einer Büroklammer fixiert, damit
 sie nicht zu leicht herausfallen.
 
 Die Flasche unten links markiert auch auf der Vorderseite unten links
