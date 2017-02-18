@@ -74,11 +74,15 @@ Alternativen
   * Phillips Hue-System: Bridge mit Birnen (ca. 150€)
   * Osram Lightify (Controller + Birne ab ca. 60€)
 
-Das Projekt ACAB (all colors are beautiful) könnte mit anderen Boxen 
-nachgebaut werden:
+Das Projekt [ACAB (all colors are beautiful)](http://acab.muc.ccc.de/)
+könnte mit anderen Boxen nachgebaut werden:
 
   * [Tedi Schubladenturm (10€)](http://www.tedi-shop.com/home-haushalt/aufbewahrung/schubladenturm.html)
 
+Im ACAB repo befinden sich diverse
+[https://github.com/muccc/acab-streetlife/tree/master/animations](Animationen),
+die auf LED-Displays mit geringer Auflösung (16x6) abgespielt werden
+können.
 
 
 Demo
