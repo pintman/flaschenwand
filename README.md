@@ -102,8 +102,11 @@ Text
 
 Der Font stammt von der Seite https://robey.lag.net/2010/01/23/tiny-monospace-font.html
 
-![Font 1](doc/minitfont1.png)
+![Font 1](doc/minifont1.png)
 
 ![Font 2](doc/minifont2.png)
 
 ![Font 3](doc/minifont3.png)
+
+![Font pico8](doc/minifont_pico8.png)
+
