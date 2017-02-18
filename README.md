@@ -108,5 +108,5 @@ Der Font stammt von der Seite https://robey.lag.net/2010/01/23/tiny-monospace-fo
 
 ![Font 3](doc/minifont3.png)
 
-![Font pico8](doc/minfont_pico8.png)
+![Font pico8](doc/minifont_pico8.png)
 
