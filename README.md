@@ -52,7 +52,7 @@ https://learn.adafruit.com/neopixels-on-raspberry-pi?view=all
 
 [Lib für den Pi](https://github.com/jgarff/rpi_ws281x)
 
-    git clone https://github.com/jgarff/rpi_ws281x.git
+    $ git clone https://github.com/jgarff/rpi_ws281x.git
 
 Vortrag der Pi and More: [Led Matrix mit der ESP8266](https://www.youtube.com/watch?v=0Q-DeAC4_y4&list=WL&index=23)
 
@@ -93,8 +93,19 @@ Nach einer ersten Inbetriebnahme sind zwei Video entstanden.
 Anschluss
 =========
 
+Anschluss an den Pi und den Level-Shifter.
+
 <img src="doc/anschluss1.jpg" width="500">
 <img src="doc/anschluss2.jpg" width="500">
+
+Die LED werden in den Flaschen versenkt. Wichtig ist der korrekte
+Abstand der Öffnungen - in diesem Fall dürfen 7cm nicht überschritten
+werden. Die einzelnen LED werden mir einer Büroklammer fixiert, damit
+sie nicht zu leicht herausfallen.
+
+Die Flasche unten links markiert auch auf der Vorderseite unten links
+den Beginn der Kette.
+
 <img src="doc/flaschen_in_kiste.jpg" width="500">
 
 Text
