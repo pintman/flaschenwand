@@ -2,6 +2,23 @@ import neopixel
 
 
 class Flaschenwand:
+    """This class is an abstraction to the neopixel rbg-strip.
+
+    It converts a strip of LEDs into a two-dimensional plane of
+    pixels. Each LED is accessible via two coordinates x and y. We
+    assume the origin (0,0) to be at lower bottom like in mathematical
+    kartesian coordinate systems.
+
+     
+    y ^
+     3|
+     2|
+     1|  x(3,0)
+      +------> x
+       123
+
+    """
+    
     def __init__(self, width=6, height=8, pin=18):
         self.width = width
         self.height = height
