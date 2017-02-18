@@ -23,7 +23,7 @@ class Flaschenwand:
 
     """
     
-    def __init__(self, width=flaschenwand.DEFAULT_WIDTH, height=flaschenwand.DEFAULT_HEIGHT, pin=18):
+    def __init__(self, width=6, height=4, pin=18):
         self.width = width
         self.height = height
 
@@ -87,11 +87,11 @@ class Flaschenwand:
         """Set the pixel at the given position to the given color value."""
         self.set_pixel(x, y, neopixel.Color(r, g, b, white))
 
-    def set_all_pixels_rgb(r, g, b, white=0):
+    def set_all_pixels_rgb(self, r, g, b, white=0):
         """Set the color of all pixels to the specified color."""
         for x in range(self.width):
             for y in range(self.height):
-                self.set_pixel_rgb(r, g, b, white)
+                self.set_pixel_rgb(x, y, r, g, b, white)
 
     def set_brightness(self, brightness):
         """Set the brightness of all pixels. Use a value between 0 and 255."""
