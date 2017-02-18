@@ -11,8 +11,8 @@ import time
 import math
 
 # Width and height of the display
-WIDTH = 2
-HEIGHT = 3
+WIDTH = flaschenwand.DEFAULT_WIDTH
+HEIGHT = flaschenwand.DEFAULT_HEIGHT
 
 
 def main():

@@ -17,6 +17,10 @@ class Flaschenwand:
       +------> x
        123
 
+
+    Each color component (red, green, blue and white) should be a value 
+    0-255 where 0 is the lowest intensity and 255 is the highest intensity.
+
     """
     
     def __init__(self, width=6, height=8, pin=18):
@@ -82,6 +86,12 @@ class Flaschenwand:
     def set_pixel_rgb(self, x, y, r, g, b, white=0):
         """Set the pixel at the given position to the given color value."""
         self.set_pixel(x, y, neopixel.Color(r, g, b, white))
+
+    def set_all_pixels_rgb(r, g, b, white=0):
+        """Set the color of all pixels to the specified color."""
+        for x in range(self.width):
+            for y in range(self.height):
+                self.set_pixel_rgb(r, g, b, white)
 
     def set_brightness(self, brightness):
         """Set the brightness of all pixels. Use a value between 0 and 255."""
