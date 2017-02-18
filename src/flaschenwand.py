@@ -23,7 +23,7 @@ class Flaschenwand:
 
     """
     
-    def __init__(self, width=6, height=8, pin=18):
+    def __init__(self, width=flaschenwand.DEFAULT_WIDTH, height=flaschenwand.DEFAULT_HEIGHT, pin=18):
         self.width = width
         self.height = height
 
