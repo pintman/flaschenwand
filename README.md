@@ -80,7 +80,7 @@ könnte mit anderen Boxen nachgebaut werden:
   * [Tedi Schubladenturm (10€)](http://www.tedi-shop.com/home-haushalt/aufbewahrung/schubladenturm.html)
 
 Im ACAB repo befinden sich diverse
-[https://github.com/muccc/acab-streetlife/tree/master/animations](Animationen),
+[Animationen](https://github.com/muccc/acab-streetlife/tree/master/animations),
 die auf LED-Displays mit geringer Auflösung (16x6) abgespielt werden
 können.
 
