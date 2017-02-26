@@ -101,3 +101,38 @@ class Flaschenwand:
         """Update the display and show the current state."""
         self.strip.show()
 
+
+class Font:
+    """A set of character that be displayed on a Flaschenwand."""
+    def __init__(self):
+        self.char_pixel = dict()
+
+        self.char_pixel["a"] = [[1,1,1],
+                                [1,0,1],
+                                [1,1,1],
+                                [1,0,1]]
+        self.char_pixel["b"] = [[1,1,0],
+                                [1,1,0],
+                                [1,0,1],
+                                [1,1,1]]
+        self.char_pixel["c"] = [[1,1,1],
+                                [1,0,0],
+                                [1,0,0],
+                                [1,1,1]]
+        # TODO add more
+
+    def pixels(self, char):
+        return self.char_pixel[char]
+
+    def show(self, flaschenwand, char, r=255, g=255, b=255):
+        """Display the given character in the given color on a Flaschenwand."""
+        pixels = self.pixels(char)
+
+        for x in range(flaschenwand.width):
+            for y in range(flaschenwand.height):
+                if y < len(pixels) and x < len(pixels[y]) and pixels[y][x] == 1:
+                    r,g,b = 255,255,255
+                else:
+                    r,g,b = 0,0,0
+
+                flaschenwand.set_pixel_rgb(x,y, r,g,b)
