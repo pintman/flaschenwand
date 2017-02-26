@@ -1,5 +1,6 @@
 import tkinter
 
+
 class FlaschenwandGui:
     def __init__(self, width=6, height=4):
         self.width = width
@@ -32,6 +33,11 @@ class FlaschenwandGui:
 
     def update(self):
         # plasma demo
+        self.__plasma_demo()
+
+        self.root.after(10, self.update)
+
+    def __plasma_demo(self):
         import time, math, colorsys
         current = time.time()
 
@@ -44,8 +50,6 @@ class FlaschenwandGui:
                 # transform from hsv to rgb: cycle through colors.
                 r, g, b = colorsys.hsv_to_rgb(v, 1, v)
                 self.set_pixel_rgb(x, y, int(r*255), int(g*255), int(b*255))
-
-        self.root.after(10, self.update)
 
 def main():
     gui = FlaschenwandGui()
