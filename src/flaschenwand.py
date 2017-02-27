@@ -107,6 +107,13 @@ class Font:
     def __init__(self):
         self.char_pixel = dict()
 
+        # Character can as well be represented in integer form
+        # For instance for character 'a':
+        # >>> 0b111101111101
+        # 3965
+        # >>> "{0:b}".format(3965)
+        # '111101111101'
+        #
         self.char_pixel[" "] = [[0,0,0],
                                 [0,0,0],
                                 [0,0,0],
