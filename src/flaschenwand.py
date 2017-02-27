@@ -107,6 +107,10 @@ class Font:
     def __init__(self):
         self.char_pixel = dict()
 
+        self.char_pixel[" "] = [[0,0,0],
+                                [0,0,0],
+                                [0,0,0],
+                                [0,0,0]]
         self.char_pixel["a"] = [[1,1,1],
                                 [1,0,1],
                                 [1,1,1],
