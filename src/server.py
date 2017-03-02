@@ -10,8 +10,9 @@ def index():
     return """
     <html>
     <body>
-        <a href="/demo_plasma">Plasma</a> <br>
-        <a href="/demo_plasma_rotating">Plasma rotierend</a>
+        <a href="/demo/plasma">Plasma</a> <br>
+        <a href="/demo/plasma_rotating">Plasma rotierend</a><br>
+        <a href="/demo/plasma_circular">Plasma kreis</a>
     <p>
         <a href="/shutdown">Shutdown</a>
     </p>
@@ -19,14 +20,15 @@ def index():
     </html>
     """
 
-@bottle.route("/demo_plasma")
-def demo_plasma_route():
-    run_py_process("demo_plasma.py")
-    bottle.redirect("/")
-
-@bottle.route("/demo_plasma_rotating")
-def demo_plasma_rotating_route():
-    run_py_process("demo_plasma_rotating.py")
+@bottle.route("/demo/<name>")
+def demo_plasma_route(name):
+    if name == "plasma":
+        run_py_process("demo_plasma.py")
+    elif name == "plasma_rotating":
+        run_py_process("demo_plasma_rotating.py")
+    elif name == "plasma_circular":
+        run_py_process("demo_plasma_circular.py")
+        
     bottle.redirect("/")
 
 def run_py_process(prog):
