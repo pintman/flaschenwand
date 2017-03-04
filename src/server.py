@@ -2,8 +2,8 @@ import bottle
 import os
 import subprocess
 
-# Process ID of the running process
-pid_running = None
+# Process of the running process
+proc_running = None
 
 @bottle.route("/")
 def index():
@@ -32,11 +32,11 @@ def demo_plasma_route(name):
     bottle.redirect("/")
 
 def run_py_process(prog):
-    global pid_running
-    if pid_running is not None:
-        pid_running.terminate()
+    global proc_running
+    if proc_running is not None:
+        proc_running.terminate()
 
-    pid_running = subprocess.Popen(["python3", prog])
+    proc_running = subprocess.Popen(["python3", prog])
 
 @bottle.route("/shutdown")
 def shutdown_route():
@@ -44,7 +44,7 @@ def shutdown_route():
     os.system("shutdown -h now")
 
 def main():
-    bottle.run(host="0.0.0.0", port=8080)
+    bottle.run(host="0.0.0.0", port=80)
 
 
 if __name__ == "__main__":
