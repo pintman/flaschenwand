@@ -40,6 +40,7 @@ def run_py_process(prog):
 
 @bottle.route("/shutdown")
 def shutdown_route():
+    run_py_process("aus.py")
     os.system("shutdown -h now")
 
 def main():
