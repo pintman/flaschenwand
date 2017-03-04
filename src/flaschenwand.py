@@ -227,7 +227,7 @@ class Font:
     def pixels(self, char):
         return self.char_pixel[char]
 
-    def show(self, flaschenwand, char, r=255, g=255, b=255):
+    def set_char(self, flaschenwand, char, r=255, g=255, b=255):
         """Display the given character in the given color on a Flaschenwand."""
         pixels = self.pixels(char)
 
@@ -238,4 +238,5 @@ class Font:
                 else:
                     r,g,b = 0,0,0
 
-                flaschenwand.set_pixel_rgb(x,y, r,g,b)
+                # turn y-axis upside-down to 
+                flaschenwand.set_pixel_rgb(x,flaschenwand.height-1-y, r,g,b)
