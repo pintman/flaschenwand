@@ -97,9 +97,13 @@ Nach einer ersten Inbetriebnahme sind folgende Videos entstanden.
 Anschluss
 =========
 
-Anschluss an den Pi und den Level-Shifter.
+Anschluss an den Pi (unten), das Netzteil (links), den Level-Shifter
+(Steckbrett mit dem 74AHC125 in der Mitte) und die LEDs (rechts).
+
+<img src="doc/Sketch_Steckplatine.png" width="700">
 
 <img src="doc/anschluss1.jpg" width="500">
+
 <img src="doc/anschluss2.jpg" width="500">
 
 Die LED werden in den Flaschen versenkt. Wichtig ist der korrekte

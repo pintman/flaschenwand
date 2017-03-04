@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import flaschenwand
 
 f = flaschenwand.Flaschenwand()

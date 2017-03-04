@@ -101,6 +101,9 @@ class Flaschenwand:
         """Update the display and show the current state."""
         self.strip.show()
 
+    def on_display(self, x, y):
+        """Check whether a given coordinate is on the display."""
+        return 0 <= x < self.width and 0 <= y < self.height
 
 class Font:
     """A set of character that be displayed on a Flaschenwand."""
@@ -227,39 +230,17 @@ class Font:
     def pixels(self, char):
         return self.char_pixel[char]
 
-    def _show(self, flaschenwand, x=0, y=0, pixels):
-        """Show a 2dim array of pixels at the desired position.
-
-         pixels array:
-
-        4.......
-        3.......
-        2..xxx..
-        1..xax..  a(3,1) in pixels, (1,0) in display when start(2,1)
-        0.......
-         012345
-
-        x=2, y=1 and 3x2 pixels will be drawn.
-        """
-        for xx in range(flaschenwand.width):
-            for yy in range(flaschenwand.height):
-                # get information for (xx,yy) from (xx+x, yy+y)
-                if pixels[xx+x][yy+y] == 1:
-                    r,g,b = 255, 255, 255
-                else:
-                    r,g,b = 0,0,0
-                    
-                flaschenwand.set_pixel_rgb(xx, yy, r,g,b)
-    
-    def show(self, flaschenwand, char, r=255, g=255, b=255):
+    def set_char(self, flaschenwand, char, x=0, y=0):
         """Display the given character in the given color on a Flaschenwand."""
         pixels = self.pixels(char)
 
-        for x in range(flaschenwand.width):
-            for y in range(flaschenwand.height):
-                if y < len(pixels) and x < len(pixels[y]) and pixels[y][x] == 1:
-                    r,g,b = 255,255,255
+        for yy in range(len(pixels)):
+            for xx in range(len(pixels[yy])):
+                if pixels[yy][xx] == 1:
+                    v = 255
                 else:
-                    r,g,b = 0,0,0
+                    v = 0
 
-                flaschenwand.set_pixel_rgb(x,y, r,g,b)
+                if flaschenwand.on_display(x+xx, flaschenwand.height-1-y-yy):
+                    # turn y-axis upside-down
+                    flaschenwand.set_pixel_rgb(x+xx,flaschenwand.height-1-y-yy, v,v,v)
