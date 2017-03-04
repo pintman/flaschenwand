@@ -1,11 +1,11 @@
 import flaschenwand
 import time
 
-f = flaschenwand.Flaschenwand()
-fo = flaschenwand.Font()
+fw = flaschenwand.Flaschenwand()
+fnt = flaschenwand.Font()
 
 for c in "abcdefghijklmnopqrstuvwxyz":
-    fo.set_char(f, c)
-    f.show()
+    fnt.set_char(fw, c)
+    fw.show()
     time.sleep(1)
 
