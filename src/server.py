@@ -29,19 +29,18 @@ template = """
 
 """
 
+demos = {"plasma":"demo_plasma.py",
+         "plasma_rotating": "demo_plasma_rotating.py",
+         "plasma_circular": "demo_plasma_rotating.py"}
+
 @bottle.route("/")
 def index():
     return bottle.template(template, red=0, green=255, blue=0)
 
 @bottle.route("/demo/<name>")
 def demo_plasma_route(name):
-    if name == "plasma":
-        run_py_process("demo_plasma.py")
-    elif name == "plasma_rotating":
-        run_py_process("demo_plasma_rotating.py")
-    elif name == "plasma_circular":
-        run_py_process("demo_plasma_circular.py")
-        
+    filename = demos[name]
+    run_py_process(filename)        
     bottle.redirect("/")
 
 @bottle.route("/color/<red:int>-<green:int>-<blue:int>")
