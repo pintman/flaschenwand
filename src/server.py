@@ -1,13 +1,12 @@
 import bottle
 import os
 import subprocess
+import flaschenwand
 
 # Process of the running process
 proc_running = None
 
-@bottle.route("/")
-def index():
-    return """
+template = """
     <html>
     <body>
         <a href="/demo/plasma">Plasma</a> <br>
@@ -16,9 +15,23 @@ def index():
     <p>
         <a href="/shutdown">Shutdown</a>
     </p>
+    <p>
+    Farbe:<span style="color:rgb({{red}},{{green}},{{blue}})"> r:{{red}} g: {{green}} b: {{blue}}</span> <br>
+    <a href="/color/{{(red+10)%255}}-{{green}}-{{blue}}">r+</a>
+    <a href="/color/{{(red-10)%255}}-{{green}}-{{blue}}">r-</a>
+    <a href="/color/{{red}}-{{(green+10)%255}}-{{blue}}">g+</a>
+    <a href="/color/{{red}}-{{(green-10)%255}}-{{blue}}">g-</a>
+    <a href="/color/{{red}}-{{green}}-{{(blue+10)%255}}">b+</a>
+    <a href="/color/{{red}}-{{green}}-{{(blue-10)%255}}">b-</a>
+    </p>
     </body>
     </html>
-    """
+
+"""
+
+@bottle.route("/")
+def index():
+    return bottle.template(template, red=0, green=255, blue=0)
 
 @bottle.route("/demo/<name>")
 def demo_plasma_route(name):
@@ -31,11 +44,23 @@ def demo_plasma_route(name):
         
     bottle.redirect("/")
 
-def run_py_process(prog):
+@bottle.route("/color/<red:int>-<green:int>-<blue:int>")
+def color_route(red, green, blue):
+    stop_process()
+    fw = flaschenwand.Flaschenwand()
+    fw.set_all_pixels_rgb(red,green,blue)
+    fw.show()
+    return bottle.template(template, red=red,green=green,blue=blue)
+
+
+def stop_process():
     global proc_running
     if proc_running is not None:
-        proc_running.terminate()
+        proc_running.terminate()    
 
+def run_py_process(prog):
+    global proc_running
+    stop_process()
     proc_running = subprocess.Popen(["python3", prog])
 
 @bottle.route("/shutdown")
