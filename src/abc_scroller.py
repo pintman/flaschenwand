@@ -23,8 +23,10 @@ fw.set_all_pixels_rgb(0,0,0)
 
 for i in range(len(chars_pos)*4):
     fw.set_all_pixels_rgb(0,0,0)    
+
     for item in chars_pos:
         fnt.set_char(fw, item.char, item.pos)
+        # scroll left
         item.pos -= 1
         
     fw.show()
