@@ -3,7 +3,7 @@ import os
 import subprocess
 import flaschenwand
 
-# Process of the running process
+# The currently running process of a demo
 proc_running = None
 
 template = """
@@ -40,7 +40,7 @@ def index():
     return bottle.template(template, red=0, green=255, blue=0)
 
 @bottle.route("/demo/<name>")
-def demo_plasma_route(name):
+def demo_route(name):
     filename = demos[name]
     run_py_process(filename)        
     bottle.redirect("/")
@@ -52,7 +52,6 @@ def color_route(red, green, blue):
     fw.set_all_pixels_rgb(red,green,blue)
     fw.show()
     return bottle.template(template, red=red,green=green,blue=blue)
-
 
 def stop_process():
     global proc_running
@@ -66,11 +65,16 @@ def run_py_process(prog):
 
 @bottle.route("/shutdown")
 def shutdown_route():
+    fw = flaschenwand.Flaschenwand()
+    fnt = flaschenwand.Font()
+    fnt.scroll_text(fw, "bye")
     run_py_process("aus.py")
     os.system("shutdown -h now")
+    bottle.redirect("/")
 
 def main():
     bottle.run(host="0.0.0.0", port=80)
+    print("###")
 
 
 if __name__ == "__main__":
