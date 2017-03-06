@@ -1,5 +1,5 @@
 import neopixel
-
+import time 
 
 class Flaschenwand:
     """This class is an abstraction to the neopixel rbg-strip.
@@ -243,4 +243,39 @@ class Font:
 
                 if flaschenwand.on_display(x+xx, flaschenwand.height-1-y-yy):
                     # turn y-axis upside-down
-                    flaschenwand.set_pixel_rgb(x+xx,flaschenwand.height-1-y-yy, v,v,v)
+                    flaschenwand.set_pixel_rgb(x+xx,flaschenwand.height-1-y-yy,
+                                               v,v,v)
+
+    def scroll_text(self, flaschenwand, text, wait_time=0.2):
+        """Scroll the given text on the given flaschenwand. wait_time controls
+        the speed of scrollin: it's the number of seconds to wait
+        before advancing the display.
+        """
+        # create dictionary to hold character and x-position to be displayed.
+        chars_pos = []
+        pos = 4
+        for c in text:
+            chars_pos += [_DisplayItem(c, pos)]
+            pos += 4
+
+        flaschenwand.set_all_pixels_rgb(0,0,0)
+
+        for i in range(len(chars_pos)*4+flaschenwand.width):
+            flaschenwand.set_all_pixels_rgb(0,0,0)    
+
+            for item in chars_pos:
+                self.set_char(flaschenwand, item.char, item.pos)
+                # scroll left
+                item.pos -= 1
+        
+            flaschenwand.show()
+    
+            time.sleep(wait_time)
+
+class _DisplayItem:
+    def __init__(self, char, pos):
+        self.char = char
+        self.pos = pos
+
+
+

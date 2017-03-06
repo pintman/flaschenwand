@@ -23,7 +23,7 @@ template = """
     <a href="/color/{{red}}-{{(green-10)%255}}-{{blue}}">g-</a>
     <a href="/color/{{red}}-{{green}}-{{(blue+10)%255}}">b+</a>
     <a href="/color/{{red}}-{{green}}-{{(blue-10)%255}}">b-</a>
-    </p>
+    </p>    
     </body>
     </html>
 
