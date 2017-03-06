@@ -10,6 +10,7 @@ template = """
     <html>
     <body>
         <a href="/demo/plasma">Plasma</a> <br>
+        <a href="/demo/farbwechsler">Farbwechsler</a> <br>
         <a href="/demo/plasma_rotating">Plasma rotierend</a><br>
         <a href="/demo/plasma_circular">Plasma kreis</a> <br>
         <a href="/demo/hallo_welt_scroller">Hallo Welt Scroller</a>
@@ -33,7 +34,8 @@ template = """
 demos = {"plasma":"demo_plasma.py",
          "plasma_rotating": "demo_plasma_rotating.py",
          "plasma_circular": "demo_plasma_rotating.py",
-         "hallo_welt_scroller": "demo_hallo_welt_scroller.py"}
+         "hallo_welt_scroller": "demo_hallo_welt_scroller.py",
+         "farbwechsler": "demo_farbwechsler.py"}
 
 @bottle.route("/")
 def index():
