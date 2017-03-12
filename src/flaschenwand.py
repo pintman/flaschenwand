@@ -75,6 +75,17 @@ class Flaschenwand:
                 else:
                     y += 1
 
+    def _next_pixel(self, x, y):
+        """Overwrite this method to arrange the LEDs in the display to your
+        needs. During initialization this method is called to get the next
+        pixel in the strop when at coordinate (x,y). The method hat to return
+        a tuple (x', y') with the next coordinates. The first point is (0,0).
+
+        TODO implement this.
+
+        """
+        pass
+
     def set_pixel(self, x, y, col):
         """Set the pixel at the given position to the neopixel color."""
         self.strip.setPixelColor(self.coords_index[(x, y)], col)
