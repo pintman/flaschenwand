@@ -9,7 +9,7 @@ class OSCServer:
     def __init__(self, ip="0.0.0.0", port=5555):
         self.note_color = { 0:"red", 1:"green", 2:"blue"}
         self.fw = flaschenwand.Flaschenwand()
-        self.colors = [0,0,0]
+        self.colors = [127,127,127]
 
         disp = pythonosc.dispatcher.Dispatcher()
         disp.map("/noteon/0/", self.handle_colors_rgb)
@@ -22,7 +22,7 @@ class OSCServer:
         """Accept a note in [0,2] and value to be uses as color value for red,
         green or blue.
         """
-        if note in self.colors:
+        if note in self.note_color:
             # val in [0,128], therefore take the double
             self.colors[note] = 2 * val
             self.fw.set_all_pixels_rgb(*self.colors)
