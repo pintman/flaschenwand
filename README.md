@@ -94,6 +94,7 @@ Nach einer ersten Inbetriebnahme sind folgende Videos entstanden.
   * [Video 2](doc/VID_20170122_171614.mp4) - Lichterkette
   * [Video 3](doc/flaschen_in_kiste.mp4) - Flaschen in Kiste
 
+
 Anschluss
 =========
 
@@ -116,6 +117,7 @@ den Beginn der Kette.
 
 <img src="doc/flaschen_in_kiste.jpg" width="500">
 
+
 Text
 ====
 
@@ -129,3 +131,19 @@ Der Font stammt von der Seite https://robey.lag.net/2010/01/23/tiny-monospace-fo
 
 ![Font pico8](doc/minifont_pico8.png)
 
+
+Ansteuerung über Hardware
+=========================
+
+Die Ansteuerung der Farben oder Sequenzen kann über einen Hardware-Controller
+erfolgen.
+
+  * Potentiometer (regebarer Widerstand) mit AD-Wandler
+  * Joypad
+  * Midi-Controller: Keyboard, Tasten, Drehregler etc.
+  * [OSC](https://de.wikipedia.org/wiki/Open_Sound_Control)-Controller als
+    App.
+
+Eine Realisierung der Idee, LEDs mit Signalsteuerung zu kombinieren, zeigt das
+Video
+[NeoPixel Color Synthesis Experiments with Tony D! ](https://www.youtube.com/watch?v=rqRHkCA6TJ4).
