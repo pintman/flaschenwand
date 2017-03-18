@@ -2,23 +2,27 @@
 """
 import argparse
 import flaschenwand
+import pythonosc.dispatcher
+import pythonosc.osc_server
 
-from pythonosc import dispatcher
-from pythonosc import osc_server
+class OSCServer:
+    def __init__(self, ip="0.0.0.0", port=5555):
+        self.note_color = { 0:"red", 1:"green", 2:"blue"}
+        self.fw = flaschenwand.Flaschenwand()
+        self.colors = [0,0,0]
 
-note_color = { 0:"red", 1:"green", 2:"blue"}
+        disp = pythonosc.dispatcher.Dispatcher()
+        disp.map("/noteon/0/", self.handle_color)
 
-fw = flaschenwand.Flaschenwand()
-colors = [0,0,0]
+        server = pythonosc.osc_server.ThreadingOSCUDPServer((ip, port), disp)
+        print("Serving on {}".format(server.server_address))
+        server.serve_forever()
 
-def print_color(msg, note, val):
-    global fw, colors
-    # print("msg", msg, "note", note, "val", val, ":", note_color[note])
-
-    # val in [0,128], therefore take the double 
-    colors[note] = 2 * val
-    fw.set_all_pixels_rgb(*colors)
-    fw.show()
+    def handle_color(self, msg, note, val):
+        # val in [0,128], therefore take the double 
+        self.colors[note] = 2 * val
+        self.fw.set_all_pixels_rgb(*self.colors)
+        self.fw.show()
   
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -28,10 +32,4 @@ if __name__ == "__main__":
                         type=int, default=5555, help="The port to listen on")
     args = parser.parse_args()
 
-    dispatcher = dispatcher.Dispatcher()
-    #dispatcher.set_default_handler(print)
-    dispatcher.map("/noteon/0/", print_color)
-
-    server = osc_server.ThreadingOSCUDPServer((args.ip, args.port), dispatcher)
-    print("Serving on {}".format(server.server_address))
-    server.serve_forever()
+    OSCServer(ip=args.ip, port=args.port)
