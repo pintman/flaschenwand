@@ -12,18 +12,22 @@ class OSCServer:
         self.colors = [0,0,0]
 
         disp = pythonosc.dispatcher.Dispatcher()
-        disp.map("/noteon/0/", self.handle_color)
+        disp.map("/noteon/0/", self.handle_colors_rgb)
 
         server = pythonosc.osc_server.ThreadingOSCUDPServer((ip, port), disp)
         print("Serving on {}".format(server.server_address))
         server.serve_forever()
 
-    def handle_color(self, msg, note, val):
-        # val in [0,128], therefore take the double 
-        self.colors[note] = 2 * val
-        self.fw.set_all_pixels_rgb(*self.colors)
-        self.fw.show()
-  
+    def handle_colors_rgb(self, msg, note, val):
+        """Accept a note in [0,2] and value to be uses as color value for red,
+        green or blue.
+        """
+        if note in self.colors:
+            # val in [0,128], therefore take the double
+            self.colors[note] = 2 * val
+            self.fw.set_all_pixels_rgb(*self.colors)
+            self.fw.show()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--ip",
