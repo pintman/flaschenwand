@@ -10,6 +10,7 @@ class OSCServer:
     def __init__(self, ip="0.0.0.0", port=5555):
         self.note_color = { 0:"red", 1:"green", 2:"blue"}
         self.fw = flaschenwand.Flaschenwand()
+        # thre color values [r,g,b]
         self.colors = [127,127,127]
 
         disp = pythonosc.dispatcher.Dispatcher()
@@ -17,7 +18,11 @@ class OSCServer:
         disp.map("/noteon/9/", self._handle_shutdown)
 
         server = pythonosc.osc_server.ThreadingOSCUDPServer((ip, port), disp)
+
         print("Serving on {}".format(server.server_address))
+        fnt = flaschenwand.Font()
+        fnt.scroll_text(self.fw, "osc ready")
+
         server.serve_forever()
 
     def _handle_colors_rgb(self, _msg, note, val):
