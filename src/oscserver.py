@@ -4,6 +4,7 @@ import argparse
 import flaschenwand
 import pythonosc.dispatcher
 import pythonosc.osc_server
+import os
 
 class OSCServer:
     def __init__(self, ip="0.0.0.0", port=5555):
@@ -12,13 +13,14 @@ class OSCServer:
         self.colors = [127,127,127]
 
         disp = pythonosc.dispatcher.Dispatcher()
-        disp.map("/noteon/0/", self.handle_colors_rgb)
+        disp.map("/noteon/0/", self._handle_colors_rgb)
+        disp.map("/noteon/9/", self._handle_shutdown)
 
         server = pythonosc.osc_server.ThreadingOSCUDPServer((ip, port), disp)
         print("Serving on {}".format(server.server_address))
         server.serve_forever()
 
-    def handle_colors_rgb(self, msg, note, val):
+    def _handle_colors_rgb(self, _msg, note, val):
         """Accept a note in [0,2] and value to be uses as color value for red,
         green or blue.
         """
@@ -28,6 +30,14 @@ class OSCServer:
             self.fw.set_all_pixels_rgb(*self.colors)
             self.fw.show()
 
+    def _handle_shutdown(self, _msg, _note, _val):
+        #print("shutdown received.", note, val)
+        fnt = flaschenwand.Font()
+        fnt.scroll_text(self.fw, "bye")
+
+        os.system("shutdown -h now")
+
+            
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--ip",
