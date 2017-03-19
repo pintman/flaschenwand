@@ -1,4 +1,6 @@
-"""Small example OSC server
+"""Small example OSC server.
+
+Demo-Video under https://youtu.be/yzpNVKG0z_oo
 """
 import argparse
 import flaschenwand

@@ -142,7 +142,7 @@ erfolgen.
   * Joypad
   * Midi-Controller: Keyboard, Tasten, Drehregler etc.
   * [OSC](https://de.wikipedia.org/wiki/Open_Sound_Control)-Controller als
-    App.
+    App. [Demo](https://youtu.be/yzpNVKG0z_oo)
 
 Eine Realisierung der Idee, LEDs mit Signalsteuerung zu kombinieren, zeigt das
 Video
