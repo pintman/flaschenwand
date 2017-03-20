@@ -61,33 +61,33 @@ class FlaschenwandWorker(threading.Thread):
 
     def run(self):
         print("worker started")
-        current = 0
+        current_time = 0
         while True:
             if self.pause:
                 continue
-            current += 0.1
+            current_time += 0.1
             #current = time.time()
             for x in range(self.fw.width):
                 for y in range(self.fw.height):
-                    r,g,b = self._rgb_at(x,y, current)                    
+                    r,g,b = self._rgb_at(x,y, current_time)
                     self.fw.set_pixel_rgb(x, y, r,g,b)
 
             self.fw.show()            
             print(self.colors, self.freqs)
             time.sleep(0.1)
 
-    def sine_norm(self, f, ph, t):
+    def sine_norm(self, freq, phase, t):
         """Return a sine value for frquency f, pahse ph at time t. Norm the result into 
         range [0,255].
         """
         # does not work with pi instead of 3
-        v = math.sin(2*3*f*t + ph)
+        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
+        v = math.sin(2*3*freq*t + phase)
         # -1 <= sin() <= +1, correct value, bring into range [0, 1]
         v = (v+1.0) / 2.0        
         return int(v*255)
-            
+
     def _rgb_at(self, x, y, clock_time):
-        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
         r = self.sine_norm(self.freqs["red"], clock_time, x)
         g = self.sine_norm(self.freqs["green"], clock_time, x)
         b = self.sine_norm(self.freqs["blue"], clock_time, x)
