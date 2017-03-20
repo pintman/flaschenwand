@@ -1,6 +1,31 @@
 """Small example OSC server.
 
 Demo-Video under https://youtu.be/yzpNVKG0z_oo
+
+Configuration
+
+colors
+
+r          g         b
+|          |         |
+|          |         |
+|          |         |
+/noteon/0  /noteon/0 /noteon/0/
+note 0     note 1    note 2
+
+frequencies
+
+r          g         b
+|          |         |
+|          |         |
+|          |         |
+/noteon/1  /noteon/1 /noteon/1
+note 0     note 1    note 2
+
+buttons
+
+#[shutdown] /noteon/9/
+
 """
 import argparse
 import flaschenwand
@@ -47,8 +72,9 @@ class OSCServer:
             
     def _handle_shutdown(self, _msg, _note, _val):
         #print("shutdown received.", note, val)
-        self.worker.scroll("bye")
-        os.system("shutdown -h now")
+        if note == 0:
+            self.worker.scroll("bye")
+            os.system("shutdown -h now")
 
 
 class FlaschenwandWorker(threading.Thread):
