@@ -25,11 +25,10 @@ class OSCServer:
         server = pythonosc.osc_server.ThreadingOSCUDPServer((ip, port), disp)
 
         print("Serving on {}".format(server.server_address))
-        fnt = flaschenwand.Font()
-        fnt.scroll_text(self.fw, "osc")
 
         self.worker = FlaschenwandWorker()
         self.worker.start()
+        self.worker.scroll("osc")
         server.serve_forever()
 
     def _handle_colors_rgb(self, _msg, note, val):
@@ -42,8 +41,9 @@ class OSCServer:
             self.worker.colors[color] = 2 * val
 
     def _handle_freq(self, msg, note, val):
-        if note == 0:
-            self.worker.freq = val
+        if note in self.note_color:
+            color = self.note_color[note]
+            self.worker.freqs[color] = val
             
     def _handle_shutdown(self, _msg, _note, _val):
         #print("shutdown received.", note, val)
@@ -57,7 +57,7 @@ class FlaschenwandWorker(threading.Thread):
         self.pause = False
         self.fw = flaschenwand.Flaschenwand()
         self.colors = {"red":127, "green":127, "blue":127}
-        self.freq = 4
+        self.freqs = {"red":4, "green":4, "blue":4}
 
     def run(self):
         print("worker started")
@@ -73,20 +73,26 @@ class FlaschenwandWorker(threading.Thread):
                     self.fw.set_pixel_rgb(x, y, r,g,b)
 
             self.fw.show()            
-            print(self.colors, "freq", self.freq)
+            print(self.colors, self.freqs)
             time.sleep(0.1)
 
+    def sine_norm(self, f, ph, t):
+        """Return a sine value for frquency f, pahse ph at time t. Norm the result into 
+        range [0,255].
+        """
+        # does not work with pi instead of 3
+        v = math.sin(2*3*f*t + ph)
+        # -1 <= sin() <= +1, correct value, bring into range [0, 1]
+        v = (v+1.0) / 2.0        
+        return int(v*255)
+            
     def _rgb_at(self, x, y, clock_time):
         #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
-        v = math.sin(2*math.pi*self.freq*x + clock_time)
-        #v = math.sin(2*3*self.freq*x + clock_time)
-        # -1 < sin() < +1, correct value, bring into range [0, 1]
-        v = (v+1.0) / 2.0
-        v=1 # TODO remove
-        r = self.colors["red"]/256 * v
-        g = self.colors["green"]/256 * v
-        b = self.colors["blue"]/256 * v
-        return int(r*255), int(g*255), int(b*255)
+        r = self.sine_norm(self.freqs["red"], clock_time, x)
+        g = self.sine_norm(self.freqs["green"], clock_time, x)
+        b = self.sine_norm(self.freqs["blue"], clock_time, x)
+
+        return r, g, b
 
     def scroll(self, text):
         self.pause = True
