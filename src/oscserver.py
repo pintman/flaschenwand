@@ -125,8 +125,41 @@ class FlaschenwandWorker(threading.Thread):
         fnt = flaschenwand.Font()
         fnt.scroll_text(self.fw, text)
         self.pause = False
-            
 
+
+class PixelValue:
+    def rgb_at(self, x,y, clock_time):
+        raise NotImplementedError()
+
+class ConstantPixelColor(PixelValue):
+    def __init__(self, color):
+        self.color = color
+    
+    def rgb_at(self, x,y, _clock_time):
+        return self.color
+
+class FrequencyPixelColor(PixelValue):
+    def __init__(self):
+        self.freqs = {"red":4, "green":4, "blue":4}
+
+    def rgb_at(self, x, y, clock_time):
+        r = self.sine_norm(self.freqs["red"], clock_time, x)
+        g = self.sine_norm(self.freqs["green"], clock_time, x)
+        b = self.sine_norm(self.freqs["blue"], clock_time, x)
+
+        return r, g, b
+
+    def sine_norm(self, freq, phase, t):
+        """Return a sine value for frequency f, pahse ph at time t. Norm the result into 
+        range [0,255].
+        """
+        # does not work with pi instead of 3
+        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
+        v = math.sin(2*3*freq*t + phase)
+        # -1 <= sin() <= +1, correct value, bring into range [0, 1]
+        v = (v+1.0) / 2.0        
+        return int(v*255)
+    
 """
 class Signal(threading.Thread):
     def __init__(self, min_val, max_val):
