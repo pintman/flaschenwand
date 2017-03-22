@@ -1,6 +1,31 @@
 """Small example OSC server.
 
 Demo-Video under https://youtu.be/yzpNVKG0z_oo
+
+Configuration
+
+colors
+
+r          g         b
+|          |         |
+|          |         |
+|          |         |
+/noteon/0  /noteon/0 /noteon/0/
+note 0     note 1    note 2
+
+frequencies
+
+r          g         b
+|          |         |
+|          |         |
+|          |         |
+/noteon/1  /noteon/1 /noteon/1
+note 0     note 1    note 2
+
+buttons
+
+#[shutdown] /noteon/9/
+
 """
 import argparse
 import flaschenwand
@@ -47,8 +72,9 @@ class OSCServer:
             
     def _handle_shutdown(self, _msg, _note, _val):
         #print("shutdown received.", note, val)
-        self.worker.scroll("bye")
-        os.system("shutdown -h now")
+        if note == 0:
+            self.worker.scroll("bye")
+            os.system("shutdown -h now")
 
 
 class FlaschenwandWorker(threading.Thread):
@@ -61,36 +87,41 @@ class FlaschenwandWorker(threading.Thread):
 
     def run(self):
         print("worker started")
-        current = 0
+        current_time = 0
         while True:
             if self.pause:
                 continue
-            current += 0.1
+            current_time += 0.1
             #current = time.time()
             for x in range(self.fw.width):
                 for y in range(self.fw.height):
-                    r,g,b = self._rgb_at(x,y, current)                    
+                    r,g,b = self._rgb_at(x,y, current_time)
                     self.fw.set_pixel_rgb(x, y, r,g,b)
 
             self.fw.show()            
             print(self.colors, self.freqs)
             time.sleep(0.1)
 
-    def sine_norm(self, f, ph, t):
+    def sine_norm(self, freq, phase, t):
         """Return a sine value for frquency f, pahse ph at time t. Norm the result into 
         range [0,255].
         """
         # does not work with pi instead of 3
-        v = math.sin(2*3*f*t + ph)
+        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
+        v = math.sin(2*3*freq*t + phase)
         # -1 <= sin() <= +1, correct value, bring into range [0, 1]
         v = (v+1.0) / 2.0        
         return int(v*255)
-            
+
     def _rgb_at(self, x, y, clock_time):
-        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
         r = self.sine_norm(self.freqs["red"], clock_time, x)
         g = self.sine_norm(self.freqs["green"], clock_time, x)
         b = self.sine_norm(self.freqs["blue"], clock_time, x)
+
+        # weight colors
+        r *= self.colors["red"] / 255
+        g *= self.colors["green"] / 255
+        b *= self.colors["blue"] / 255
 
         return r, g, b
 
@@ -99,8 +130,41 @@ class FlaschenwandWorker(threading.Thread):
         fnt = flaschenwand.Font()
         fnt.scroll_text(self.fw, text)
         self.pause = False
-            
 
+
+class PixelValue:
+    def rgb_at(self, x,y, clock_time):
+        raise NotImplementedError()
+
+class ConstantPixelColor(PixelValue):
+    def __init__(self, color):
+        self.color = color
+    
+    def rgb_at(self, x,y, _clock_time):
+        return self.color
+
+class FrequencyPixelColor(PixelValue):
+    def __init__(self):
+        self.freqs = {"red":4, "green":4, "blue":4}
+
+    def rgb_at(self, x, y, clock_time):
+        r = self.sine_norm(self.freqs["red"], clock_time, x)
+        g = self.sine_norm(self.freqs["green"], clock_time, x)
+        b = self.sine_norm(self.freqs["blue"], clock_time, x)
+
+        return r, g, b
+
+    def sine_norm(self, freq, phase, t):
+        """Return a sine value for frequency f, pahse ph at time t. Norm the result into 
+        range [0,255].
+        """
+        # does not work with pi instead of 3
+        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
+        v = math.sin(2*3*freq*t + phase)
+        # -1 <= sin() <= +1, correct value, bring into range [0, 1]
+        v = (v+1.0) / 2.0        
+        return int(v*255)
+    
 """
 class Signal(threading.Thread):
     def __init__(self, min_val, max_val):
