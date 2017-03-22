@@ -118,6 +118,11 @@ class FlaschenwandWorker(threading.Thread):
         g = self.sine_norm(self.freqs["green"], clock_time, x)
         b = self.sine_norm(self.freqs["blue"], clock_time, x)
 
+        # weight colors
+        r *= self.colors["red"] / 255
+        g *= self.colors["green"] / 255
+        b *= self.colors["blue"] / 255
+
         return r, g, b
 
     def scroll(self, text):
