@@ -3,6 +3,7 @@ import time
 import threading
 import neopixel
 
+
 class Flaschenwand:
     """This class is an abstraction to the neopixel rbg-strip.
 
@@ -118,6 +119,7 @@ class Flaschenwand:
         """Check whether a given coordinate is on the display."""
         return 0 <= x < self.width and 0 <= y < self.height
 
+
 class Font:
     """A set of character that be displayed on a Flaschenwand."""
     def __init__(self):
@@ -130,114 +132,114 @@ class Font:
         # >>> "{0:b}".format(3965)
         # '111101111101'
         #
-        self.char_pixel[" "] = [[0,0,0],
-                                [0,0,0],
-                                [0,0,0],
-                                [0,0,0]]
-        self.char_pixel["a"] = [[1,1,1],
-                                [1,0,1],
-                                [1,1,1],
-                                [1,0,1]]
-        self.char_pixel["b"] = [[1,1,0],
-                                [1,1,0],
-                                [1,0,1],
-                                [1,1,1]]
-        self.char_pixel["c"] = [[1,1,1],
-                                [1,0,0],
-                                [1,0,0],
-                                [1,1,1]]
-        self.char_pixel["d"] = [[1,1,0],
-                                [1,0,1],
-                                [1,0,1],
-                                [1,1,0]]
-        self.char_pixel["e"] = [[1,1,1],
-                                [1,1,0],
-                                [1,0,0],
-                                [1,1,1]]
-        self.char_pixel["f"] = [[1,1,1],
-                                [1,1,0],
-                                [1,0,0],
-                                [1,0,0]]
-        self.char_pixel["g"] = [[1,1,1],
-                                [1,0,0],
-                                [1,0,1],
-                                [1,1,1]]
-        self.char_pixel["h"] = [[1,0,1],
-                                [1,0,1],
-                                [1,1,1],
-                                [1,0,1]]
-        self.char_pixel["i"] = [[1,1,1],
-                                [0,1,0],
-                                [0,1,0],
-                                [1,1,1]]
-        self.char_pixel["j"] = [[1,1,1],
-                                [0,1,0],
-                                [0,1,0],
-                                [1,1,0]]
-        self.char_pixel["k"] = [[1,0,1],
-                                [1,1,0],
-                                [1,0,1],
-                                [1,0,1]]
-        self.char_pixel["l"] = [[1,0,0],
-                                [1,0,0],
-                                [1,0,0],
-                                [1,1,1]]
-        self.char_pixel["m"] = [[1,1,1],
-                                [1,1,1],
-                                [1,0,1],
-                                [1,0,1]]
-        self.char_pixel["n"] = [[1,1,0],
-                                [1,0,1],
-                                [1,0,1],
-                                [1,0,1]]
-        self.char_pixel["o"] = [[0,1,1],
-                                [1,0,1],
-                                [1,0,1],
-                                [1,1,0]]
-        self.char_pixel["p"] = [[1,1,1],
-                                [1,0,1],
-                                [1,1,1],
-                                [1,0,0]]
-        self.char_pixel["q"] = [[0,1,0],
-                                [1,0,1],
-                                [1,1,0],
-                                [0,1,1]]
-        self.char_pixel["r"] = [[1,1,1],
-                                [1,0,1],
-                                [1,1,0],
-                                [1,0,1]]
-        self.char_pixel["s"] = [[0,1,1],
-                                [1,0,0],
-                                [0,0,1],
-                                [1,1,0]]
-        self.char_pixel["t"] = [[1,1,1],
-                                [0,1,0],
-                                [0,1,0],
-                                [0,1,0]]
-        self.char_pixel["u"] = [[1,0,1],
-                                [1,0,1],
-                                [1,0,1],
-                                [0,1,1]]
-        self.char_pixel["v"] = [[1,0,1],
-                                [1,0,1],
-                                [1,1,1],
-                                [0,1,0]]
-        self.char_pixel["w"] = [[1,0,1],
-                                [1,0,1],
-                                [1,1,1],
-                                [1,1,1]]
-        self.char_pixel["x"] = [[1,0,1],
-                                [0,1,0],
-                                [1,0,1],
-                                [1,0,1]]
-        self.char_pixel["y"] = [[1,0,1],
-                                [1,1,1],
-                                [0,0,1],
-                                [1,1,1]]
-        self.char_pixel["z"] = [[1,1,1],
-                                [0,0,1],
-                                [1,0,0],
-                                [1,1,1]]
+        self.char_pixel[" "] = [[0, 0, 0],
+                                [0, 0, 0],
+                                [0, 0, 0],
+                                [0, 0, 0]]
+        self.char_pixel["a"] = [[1, 1, 1],
+                                [1, 0, 1],
+                                [1, 1, 1],
+                                [1, 0, 1]]
+        self.char_pixel["b"] = [[1, 1, 0],
+                                [1, 1, 0],
+                                [1, 0, 1],
+                                [1, 1, 1]]
+        self.char_pixel["c"] = [[1, 1, 1],
+                                [1, 0, 0],
+                                [1, 0, 0],
+                                [1, 1, 1]]
+        self.char_pixel["d"] = [[1, 1, 0],
+                                [1, 0, 1],
+                                [1, 0, 1],
+                                [1, 1, 0]]
+        self.char_pixel["e"] = [[1, 1, 1],
+                                [1, 1, 0],
+                                [1, 0, 0],
+                                [1, 1, 1]]
+        self.char_pixel["f"] = [[1, 1, 1],
+                                [1, 1, 0],
+                                [1, 0, 0],
+                                [1, 0, 0]]
+        self.char_pixel["g"] = [[1, 1, 1],
+                                [1, 0, 0],
+                                [1, 0, 1],
+                                [1, 1, 1]]
+        self.char_pixel["h"] = [[1, 0, 1],
+                                [1, 0, 1],
+                                [1, 1, 1],
+                                [1, 0, 1]]
+        self.char_pixel["i"] = [[1, 1, 1],
+                                [0, 1, 0],
+                                [0, 1, 0],
+                                [1, 1, 1]]
+        self.char_pixel["j"] = [[1, 1, 1],
+                                [0, 1, 0],
+                                [0, 1, 0],
+                                [1, 1, 0]]
+        self.char_pixel["k"] = [[1, 0, 1],
+                                [1, 1, 0],
+                                [1, 0, 1],
+                                [1, 0, 1]]
+        self.char_pixel["l"] = [[1, 0, 0],
+                                [1, 0, 0],
+                                [1, 0, 0],
+                                [1, 1, 1]]
+        self.char_pixel["m"] = [[1, 1, 1],
+                                [1, 1, 1],
+                                [1, 0, 1],
+                                [1, 0, 1]]
+        self.char_pixel["n"] = [[1, 1, 0],
+                                [1, 0, 1],
+                                [1, 0, 1],
+                                [1, 0, 1]]
+        self.char_pixel["o"] = [[0, 1, 1],
+                                [1, 0, 1],
+                                [1, 0, 1],
+                                [1, 1, 0]]
+        self.char_pixel["p"] = [[1, 1, 1],
+                                [1, 0, 1],
+                                [1, 1, 1],
+                                [1, 0, 0]]
+        self.char_pixel["q"] = [[0, 1, 0],
+                                [1, 0, 1],
+                                [1, 1, 0],
+                                [0, 1, 1]]
+        self.char_pixel["r"] = [[1, 1, 1],
+                                [1, 0, 1],
+                                [1, 1, 0],
+                                [1, 0, 1]]
+        self.char_pixel["s"] = [[0, 1, 1],
+                                [1, 0, 0],
+                                [0, 0, 1],
+                                [1, 1, 0]]
+        self.char_pixel["t"] = [[1, 1, 1],
+                                [0, 1, 0],
+                                [0, 1, 0],
+                                [0, 1, 0]]
+        self.char_pixel["u"] = [[1, 0, 1],
+                                [1, 0, 1],
+                                [1, 0, 1],
+                                [0, 1, 1]]
+        self.char_pixel["v"] = [[1, 0, 1],
+                                [1, 0, 1],
+                                [1, 1, 1],
+                                [0, 1, 0]]
+        self.char_pixel["w"] = [[1, 0, 1],
+                                [1, 0, 1],
+                                [1, 1, 1],
+                                [1, 1, 1]]
+        self.char_pixel["x"] = [[1, 0, 1],
+                                [0, 1, 0],
+                                [1, 0, 1],
+                                [1, 0, 1]]
+        self.char_pixel["y"] = [[1, 0, 1],
+                                [1, 1, 1],
+                                [0, 0, 1],
+                                [1, 1, 1]]
+        self.char_pixel["z"] = [[1, 1, 1],
+                                [0, 0, 1],
+                                [1, 0, 0],
+                                [1, 1, 1]]
         # TODO add numbers
 
     def pixels(self, char):
@@ -256,8 +258,8 @@ class Font:
 
                 if flaschenwand.on_display(x+xx, flaschenwand.height-1-y-yy):
                     # turn y-axis upside-down
-                    flaschenwand.set_pixel_rgb(x+xx,flaschenwand.height-1-y-yy,
-                                               v,v,v)
+                    flaschenwand.set_pixel_rgb(x+xx, flaschenwand.height-1-y-yy,
+                                               v, v, v)
 
     def scroll_text(self, flaschenwand, text, wait_time=0.2):
         """Scroll the given text on the given flaschenwand. wait_time controls
@@ -271,10 +273,10 @@ class Font:
             chars_pos += [_DisplayItem(c, pos)]
             pos += 4
 
-        flaschenwand.set_all_pixels_rgb(0,0,0)
+        flaschenwand.set_all_pixels_rgb(0, 0, 0)
 
         for i in range(len(chars_pos)*4+flaschenwand.width):
-            flaschenwand.set_all_pixels_rgb(0,0,0)    
+            flaschenwand.set_all_pixels_rgb(0, 0, 0)
 
             for item in chars_pos:
                 self.set_char(flaschenwand, item.char, item.pos)
@@ -284,6 +286,7 @@ class Font:
             flaschenwand.show()
     
             time.sleep(wait_time)
+
 
 class _DisplayItem:
     def __init__(self, char, pos):
@@ -296,8 +299,8 @@ class FlaschenwandWorker(threading.Thread):
         super().__init__()
         self.pause = False
         self.fw = Flaschenwand()
-        self.colors = {"red":127, "green":127, "blue":127}
-        self.freqs = {"red":4, "green":4, "blue":4}
+        self.colors = {"red": 127, "green": 127, "blue": 127}
+        self.freqs = {"red": 4, "green": 4, "blue": 4}
 
     def run(self):
         print("worker started")
@@ -306,22 +309,22 @@ class FlaschenwandWorker(threading.Thread):
             if self.pause:
                 continue
             current_time += 0.1
-            #current = time.time()
+            # current = time.time()
             for x in range(self.fw.width):
                 for y in range(self.fw.height):
-                    r,g,b = self._rgb_at(x,y, current_time)
-                    self.fw.set_pixel_rgb(x, y, r,g,b)
+                    r, g, b = self._rgb_at(x, y, current_time)
+                    self.fw.set_pixel_rgb(x, y, r, g, b)
 
             self.fw.show()
-            #print(self.colors, self.freqs)
+            # print(self.colors, self.freqs)
             time.sleep(0.1)
 
     def sine_norm(self, freq, phase, t):
-        """Return a sine value for frquency f, pahse ph at time t. Norm the result into 
-        range [0,255].
+        """Return a sine value for frquency f, phase ph at time t. Norm the
+        result into range [0,255].
         """
         # does not work with pi instead of 3
-        #v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
+        # v = math.sin(2.0 * math.pi * self.freq * x + clock_time)
         v = math.sin(2*3*freq*t + phase)
         # -1 <= sin() <= +1, correct value, bring into range [0, 1]
         v = (v+1.0) / 2.0        
@@ -344,4 +347,3 @@ class FlaschenwandWorker(threading.Thread):
         fnt = Font()
         fnt.scroll_text(self.fw, text, wait_time=0.1)
         self.pause = False
-

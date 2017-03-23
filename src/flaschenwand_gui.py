@@ -11,12 +11,13 @@ class FlaschenwandGui:
 
         width_px = 600
         height_px = 400
-        self.canvas = tkinter.Canvas(self.root, width=width_px, height=height_px)
+        self.canvas = tkinter.Canvas(self.root,
+                                     width=width_px, height=height_px)
         for x in range(width):
             for y in range(height):
                 width_per_pixel = width_px/width
                 height_per_pixel = height_px/height
-                self.coords_rect[(x,y)] = self.canvas.create_rectangle(
+                self.coords_rect[(x, y)] = self.canvas.create_rectangle(
                     x * width_per_pixel,
                     y * height_per_pixel,
                     x * width_per_pixel + width_per_pixel,
@@ -29,7 +30,7 @@ class FlaschenwandGui:
 
     def set_pixel_rgb(self, x, y, r, g, b):
         tk_rgb = "#%02x%02x%02x" % (r, g, b)
-        self.canvas.itemconfig(self.coords_rect[(x,y)], fill=tk_rgb)
+        self.canvas.itemconfig(self.coords_rect[(x, y)], fill=tk_rgb)
 
     def update(self):
         # plasma demo
@@ -38,7 +39,9 @@ class FlaschenwandGui:
         self.root.after(10, self.update)
 
     def __plasma_demo(self):
-        import time, math, colorsys
+        import time
+        import math
+        import colorsys
         current = time.time()
 
         for x in range(self.width):
@@ -51,8 +54,9 @@ class FlaschenwandGui:
                 r, g, b = colorsys.hsv_to_rgb(v, 1, v)
                 self.set_pixel_rgb(x, y, int(r*255), int(g*255), int(b*255))
 
+
 def main():
-    gui = FlaschenwandGui()
+    FlaschenwandGui()
 
 if __name__ == "__main__":
     main()
