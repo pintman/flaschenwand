@@ -123,7 +123,7 @@ class FlaschenwandWorker(threading.Thread):
         g *= self.colors["green"] / 255
         b *= self.colors["blue"] / 255
 
-        return r, g, b
+        return int(r), int(g), int(b)
 
     def scroll(self, text):
         self.pause = True
