@@ -51,8 +51,7 @@ class Flaschenwand:
         >>> f.coords_index[(0,1)]
         5
         """
-        x = 0
-        y = 0
+        x, y = 0, 0
         num = 0
 
         while num < self.width * self.height:
@@ -62,30 +61,22 @@ class Flaschenwand:
             num += 1
 
             # update x,y coordinates
-            # 2    -> -> -> ...
-            # 1  ^ <- <- <-
-            # 0    -> -> -> ^
-            if y % 2 == 0:
-                # moving  ->
-                if x + 1 < self.width:
-                    x += 1
-                else:
-                    y += 1
-            else:
-                # moving  <-
-                if x - 1 >= 0:
-                    x -= 1
-                else:
-                    y += 1
+            x, y = self._next_pixel(x, y)
 
     def _next_pixel(self, x, y):
         """Overwrite this method to arrange the LEDs in the display to your
         needs. During initialization this method is called to get the next
         pixel in the strop when at coordinate (x,y). The method hat to return
         a tuple (x', y') with the next coordinates. The first point is (0,0).
+
+       The default implementation goes like this
+
+         2    -> -> -> ...
+         1  ^ <- <- <-
+         0    -> -> -> ^
         """
-        xneu, yneu = -1, -1
-        
+        xneu, yneu = x, y
+
         if y % 2 == 0:
             # moving  ->
             if x + 1 < self.width:
