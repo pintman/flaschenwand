@@ -83,11 +83,23 @@ class Flaschenwand:
         needs. During initialization this method is called to get the next
         pixel in the strop when at coordinate (x,y). The method hat to return
         a tuple (x', y') with the next coordinates. The first point is (0,0).
-
-        TODO implement this.
-
         """
-        pass
+        xneu, yneu = -1, -1
+        
+        if y % 2 == 0:
+            # moving  ->
+            if x + 1 < self.width:
+                xneu = x + 1
+            else:
+                yneu = y + 1
+        else:
+            # moving  <-
+            if x - 1 >= 0:
+                xneu = x - 1
+            else:
+                yneu = y + 1
+
+        return xneu, yneu
 
     def set_pixel(self, x, y, col):
         """Set the pixel at the given position to the neopixel color."""
