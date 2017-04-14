@@ -1,7 +1,7 @@
 import sys
 import time
 import rtmidi.midiutil as midi
-#from rtmidi.midiutil import open_midiinput, list_input_ports
+import collections
 
 # taken from
 # https://github.com/SpotlightKid/python-rtmidi/blob/master/examples/basic/midiin_callback.py
@@ -9,7 +9,7 @@ import rtmidi.midiutil as midi
 class MidiInputHandler:
     def __init__(self, port):
         self.port = port
-        self.vs = {}
+        self.vs = collections.OrderedDict()
 
     def cls(self):
         print(chr(27) + "[2J")
@@ -19,7 +19,7 @@ class MidiInputHandler:
         chan, note, val = message
 
         if chan not in self.vs:
-            self.vs[chan] = {}
+            self.vs[chan] = collections.OrderedDict()
             
         self.vs[chan][note] = val
 
@@ -31,7 +31,7 @@ class MidiInputHandler:
         
     def print_values(self):
         self.cls()
-
+        
         for chan in self.vs:
             print("chan", chan)
             for note in self.vs[chan]:
