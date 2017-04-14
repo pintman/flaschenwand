@@ -117,6 +117,10 @@ den Beginn der Kette.
 
 <img src="doc/flaschen_in_kiste.jpg" width="500">
 
+Zwei Kisten lassen sich auch nebeneinander anordnen.
+
+<img src="doc/flaschen_in_2_kisten.jpg" width="500">
+
 
 Text
 ====
