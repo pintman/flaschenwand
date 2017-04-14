@@ -25,13 +25,18 @@ class MidiInputHandler:
 
         self.print_values()
 
+    def note_val_as_string(self, val):
+        var = (val//2) * "#"
+        return var + " ({})".format(val)
+        
     def print_values(self):
         self.cls()
 
         for chan in self.vs:
             print("chan", chan)
             for note in self.vs[chan]:
-                print("note", note, "=", self.vs[chan][note])
+                print("note", note, "=",
+                      self.note_val_as_string(self.vs[chan][note]))
                 
 
 if len(sys.argv) > 1:
