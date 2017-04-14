@@ -3,6 +3,11 @@ import time
 import rtmidi.midiutil as midi
 import collections
 
+# installation of rtmidi
+#
+# pip install python-rtmidi
+# ggf.: apt install g++ libjack-dev python3-dev libasound2-dev
+
 # taken from
 # https://github.com/SpotlightKid/python-rtmidi/blob/master/examples/basic/midiin_callback.py
 
