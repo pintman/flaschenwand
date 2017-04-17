@@ -26,9 +26,15 @@ class Flaschenwand:
 
     """
     
-    def __init__(self, width=6, height=4, pin=18):
+    def __init__(self, width=8, height=6, pin=18, ignoring_nums=[24]):
+        """Initialize the falschenwand. 
+
+        Ignoring nums is a list of led numbers that should be ignored.
+
+        """
         self.width = width
         self.height = height
+        self.ignoring_nums = ignoring_nums
 
         self.strip = neopixel.Adafruit_NeoPixel(width*height, pin)
         self.strip.begin()
@@ -51,10 +57,14 @@ class Flaschenwand:
         >>> f.coords_index[(0,1)]
         5
         """
-        x, y = 0, 0
+        x, y = self.width-1, 0
         num = 0
 
-        while num < self.width * self.height:
+        while len(self.coords_index) < self.width * self.height:            
+            if num in self.ignoring_nums:
+                num += 1
+                continue
+
             self.coords_index[(x, y)] = num
 
             # update pixel number
@@ -62,33 +72,37 @@ class Flaschenwand:
 
             # update x,y coordinates
             x, y = self._next_pixel(x, y)
+            
+        # TODO (0,0) not correctly mapped
 
     def _next_pixel(self, x, y):
         """Overwrite this method to arrange the LEDs in the display to your
-        needs. During initialization this method is called to get the next
-        pixel in the strop when at coordinate (x,y). The method hat to return
-        a tuple (x', y') with the next coordinates. The first point is (0,0).
+        needs. During initialization this method is called to get the
+        next pixel in the strip when at coordinate (x,y). The method
+        hat to return a tuple (x', y') with the next coordinates. The
+        first point is at the bottom right.
 
        The default implementation goes like this
 
-         2    -> -> -> ...
-         1  ^ <- <- <-
-         0    -> -> -> ^
+         2        <---  <---
+         1        v  ^  v  ^ 
+         0      <--  <---  ^
+            0  1  2  3  4  5 ...
         """
         xneu, yneu = x, y
 
-        if y % 2 == 0:
-            # moving  ->
-            if x + 1 < self.width:
-                xneu = x + 1
+        if x % 2 == 0:
+            # moving v
+            if y - 1 >= 0:
+                yneu = y - 1
             else:
-                yneu = y + 1
-        else:
-            # moving  <-
-            if x - 1 >= 0:
                 xneu = x - 1
-            else:
+        else:
+            # moving ^
+            if y + 1 < self.height:
                 yneu = y + 1
+            else:
+                xneu = x - 1 
 
         return xneu, yneu
 
