@@ -61,7 +61,7 @@ Verschiedene mögliche Probleme bzgl. HDMI und Audio des Pi werden in
 beschrieben. So muss das Soundmodul snd_bcm2835 deaktiviert werden, da
 es mit dem PWM-Pin konkurriert. Die erfolgt duch
 
-    $ echo "blacklist snd_bcm2835" >> /etc/modprobe.d/raspi-blacklist.conf"
+    $ sudo bash -c "echo 'blacklist snd_bcm2835' >> /etc/modprobe.d/raspi-blacklist.conf"
 
 Das Projekt acab des Münchener CCC stellt in seinem 
 [Repo](https://github.com/muccc/acab-streetlife?files=1) verschiedene Demos 
