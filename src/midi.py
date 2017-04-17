@@ -3,7 +3,7 @@ import configparser
 import rtmidi.midiutil as midi
 import time
 import flaschenwand
-
+import os
 
 class Midi2Broker:
     """Receiving MIDI events and sending them to an MQTT broker."""
@@ -31,8 +31,9 @@ class Midi2Broker:
 class Broker2Flaschenwand:
     """Listening for broker messages and using them to control a flaschenand."""
     
-    def __init__(self, host, port, topic2rgb):        
+    def __init__(self, host, port, topic2rgb, shutdown_topic):        
         self._topic2rgb = topic2rgb
+        self.shutdown_topic = shutdown_topic
         
         print("listening for msgs on", host, port)
         self.mqtt = mqtt.Client()
@@ -55,7 +56,10 @@ class Broker2Flaschenwand:
         # val in [0,128], therefore take the double
         val = 2 * int(msg.payload)
 
-        if msg.topic in self._topic2rgb:            
+        if msg.topic == self.shutdown_topic:
+            self._handle_shutdown()
+            
+        elif msg.topic in self._topic2rgb:            
             col = self._topic2rgb[msg.topic]
             # Check if topic maps to frequency (redf, greenf, bluef)
             if col.endswith("f"):
@@ -64,11 +68,9 @@ class Broker2Flaschenwand:
             else:
                 self.worker.colors[col] = val
     
-    def _handle_shutdown(self, _msg, _note, _val):
-        # TODO
-        if note == 0:
-            self.worker.scroll("bye")
-            os.system("shutdown -h now")
+    def _handle_shutdown(self):
+        self.worker.scroll("bye")
+        os.system("shutdown -h now")
         
         
 if __name__ == "__main__":
@@ -82,15 +84,16 @@ if __name__ == "__main__":
     print('Use a client to watch mqtt messages: mosquitto_sub -h {} -t "midi/#" -v'.
           format(config["mqtt"]["host"]))
 
-    topic2rgb = {config["mqtt"]["redf"]: "redf",
-                 config["mqtt"]["greenf"]: "greenf",
-                 config["mqtt"]["bluef"]: "bluef",
-                 config["mqtt"]["red"]: "red",
-                 config["mqtt"]["green"]: "green",
-                 config["mqtt"]["blue"]: "blue"}
+    topic2rgb = {config["mqtt_topics"]["redf"]: "redf",
+                 config["mqtt_topics"]["greenf"]: "greenf",
+                 config["mqtt_topics"]["bluef"]: "bluef",
+                 config["mqtt_topics"]["red"]: "red",
+                 config["mqtt_topics"]["green"]: "green",
+                 config["mqtt_topics"]["blue"]: "blue"}
     fw_controller = Broker2Flaschenwand(config["mqtt"]["host"],
                                         config.getint("mqtt", "port"),
-                                        topic2rgb)
+                                        topic2rgb,
+                                        config["mqtt_topics"]["shutdown"])
     fw_controller.start()
 
     print("finished")
