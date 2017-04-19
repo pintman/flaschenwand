@@ -36,7 +36,7 @@ class Flaschenwand:
         self.height = height
         self.ignoring_nums = ignoring_nums
 
-        self.strip = neopixel.Adafruit_NeoPixel(width*height, pin)
+        self.strip = neopixel.Adafruit_NeoPixel(width*height+len(ignoring_nums), pin)
         self.strip.begin()
 
         self.coords_index = dict()
