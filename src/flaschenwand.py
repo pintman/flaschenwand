@@ -338,7 +338,7 @@ class FlaschenwandWorker(threading.Thread):
                     self.fw.set_pixel_rgb(x, y, r, g, b)
 
             self.fw.show()
-            # print(self.colors, self.freqs)
+
             time.sleep(0.1)
 
     def scroll(self, text):
@@ -349,7 +349,6 @@ class FlaschenwandWorker(threading.Thread):
 
     def next_program(self):
         self.progs = self.progs[1:] + [self.progs[0]]
-        print("using program", self.progs[0])
         
 
 class FlaschenwandProgramm:
@@ -383,7 +382,6 @@ class FlaschenwandProgramm:
 class PlasmaRotating(FlaschenwandProgramm):
     def __init__(self, rgb_colors, rgb_frequencies):
         super().__init__(rgb_colors, rgb_frequencies)
-        print("colors", self.colors)
 
     def rgb_at(self, x, y, clock_time):
         v = math.sin(1*(0.5*x*math.sin(clock_time/2) + 0.5*y*math.cos(clock_time/3)) + clock_time)

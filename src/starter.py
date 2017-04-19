@@ -70,7 +70,6 @@ class Broker2Flaschenwand:
                 self.worker.colors[col] = val
 
         elif msg.topic == self.next_topic and val != 0:
-            print("next program")
             self.worker.next_program()
     
     def _handle_shutdown(self):
