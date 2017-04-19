@@ -318,6 +318,8 @@ class FlaschenwandWorker(threading.Thread):
         self.fw = Flaschenwand()
         self.colors = {"red": 127, "green": 127, "blue": 127}
         self.freqs = {"red": 4, "green": 4, "blue": 4}
+        self.progs = [FlaschenwandProgramm(self.colors, self.freqs),
+                      PlasmaRotating(self.colors, self.freqs)]
 
     def run(self):
         print("worker started")
@@ -327,15 +329,33 @@ class FlaschenwandWorker(threading.Thread):
                 continue
             current_time += 0.1
             # current = time.time()
+            prog = self.progs[0]
+            prog.colors, prog.freqs = self.colors, self.freqs
             for x in range(self.fw.width):
                 for y in range(self.fw.height):
-                    r, g, b = self._rgb_at(x, y, current_time)
+                    r, g, b = prog.rgb_at(x, y, current_time)
                     self.fw.set_pixel_rgb(x, y, r, g, b)
 
             self.fw.show()
             # print(self.colors, self.freqs)
             time.sleep(0.1)
 
+    def scroll(self, text):
+        self.pause = True
+        fnt = Font()
+        fnt.scroll_text(self.fw, text, wait_time=0.1)
+        self.pause = False
+
+    def next_program(self):
+        self.progs = self.progs[1:] + [self.progs[0]]
+        print("using program", self.progs[0])
+        
+
+class FlaschenwandProgramm:
+    def __init__(self, rgb_colors, rgb_frequencies):
+        self.colors = rgb_colors
+        self.freqs = rgb_frequencies
+    
     def sine_norm(self, freq, phase, t):
         """Return a sine value for frquency f, phase ph at time t. Norm the
         result into range [0,255].
@@ -347,7 +367,7 @@ class FlaschenwandWorker(threading.Thread):
         v = (v+1.0) / 2.0        
         return int(v*255)
 
-    def _rgb_at(self, x, y, clock_time):
+    def rgb_at(self, x, y, clock_time):
         r = self.sine_norm(self.freqs["red"], clock_time, x)
         g = self.sine_norm(self.freqs["green"], clock_time, x)
         b = self.sine_norm(self.freqs["blue"], clock_time, x)
@@ -358,9 +378,26 @@ class FlaschenwandWorker(threading.Thread):
         b *= self.colors["blue"] / 255
 
         return int(r), int(g), int(b)
+        
+class PlasmaRotating(FlaschenwandProgramm):
+    def __init__(self, rgb_colors, rgb_frequencies):
+        super().__init__(rgb_colors, rgb_frequencies)
+        print("colors", self.colors)
 
-    def scroll(self, text):
-        self.pause = True
-        fnt = Font()
-        fnt.scroll_text(self.fw, text, wait_time=0.1)
-        self.pause = False
+    def rgb_at(self, x, y, clock_time):
+        v = math.sin(1*(0.5*x*math.sin(clock_time/2) + 0.5*y*math.cos(clock_time/3)) + clock_time)
+        v = (v+1.0) / 2.0 * 255.0
+
+        """
+        r = self.sine_norm(self.freqs["red"], clock_time, x)
+        g = self.sine_norm(self.freqs["green"], clock_time, x)
+        b = self.sine_norm(self.freqs["blue"], clock_time, x)
+        """
+        r,g,b = v,v,v
+        
+        # weight colors
+        r *= self.colors["red"] / 255
+        g *= self.colors["green"] / 255
+        b *= self.colors["blue"] / 255
+
+        return int(r), int(g), int(b)

@@ -5,6 +5,8 @@ import time
 import flaschenwand
 import os
 
+# TODO rename to starter.py
+
 class Midi2Broker:
     """Receiving MIDI events and sending them to an MQTT broker."""
     
@@ -31,8 +33,9 @@ class Midi2Broker:
 class Broker2Flaschenwand:
     """Listening for broker messages and using them to control a flaschenand."""
     
-    def __init__(self, host, port, topic2rgb, shutdown_topic):        
+    def __init__(self, host, port, topic2rgb, shutdown_topic, next_topic):        
         self._topic2rgb = topic2rgb
+        self.next_topic = next_topic
         self.shutdown_topic = shutdown_topic
         
         print("listening for msgs on", host, port)
@@ -56,7 +59,7 @@ class Broker2Flaschenwand:
         # val in [0,128], therefore take the double
         val = 2 * int(msg.payload)
 
-        if msg.topic == self.shutdown_topic:
+        if msg.topic == self.shutdown_topic and val != 0:
             self._handle_shutdown()
             
         elif msg.topic in self._topic2rgb:            
@@ -67,11 +70,15 @@ class Broker2Flaschenwand:
                 self.worker.freqs[col] = val
             else:
                 self.worker.colors[col] = val
+
+        elif msg.topic == self.next_topic and val != 0:
+            print("next program")
+            self.worker.next_program()
     
     def _handle_shutdown(self):
         self.worker.scroll("bye")
         os.system("shutdown -h now")
-        
+
         
 if __name__ == "__main__":
     config = configparser.ConfigParser()
@@ -93,7 +100,8 @@ if __name__ == "__main__":
     fw_controller = Broker2Flaschenwand(config["mqtt"]["host"],
                                         config.getint("mqtt", "port"),
                                         topic2rgb,
-                                        config["mqtt_topics"]["shutdown"])
+                                        config["mqtt_topics"]["shutdown"],
+                                        config["mqtt_topics"]["next_program"])
     fw_controller.start()
 
     print("finished")
