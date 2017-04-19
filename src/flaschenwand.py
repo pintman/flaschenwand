@@ -2,6 +2,7 @@ import math
 import time 
 import threading
 import neopixel
+import colorsys
 
 
 class Flaschenwand:
@@ -386,14 +387,17 @@ class PlasmaRotating(FlaschenwandProgramm):
 
     def rgb_at(self, x, y, clock_time):
         v = math.sin(1*(0.5*x*math.sin(clock_time/2) + 0.5*y*math.cos(clock_time/3)) + clock_time)
-        v = (v+1.0) / 2.0 * 255.0
+        v = (v+1.0) / 2.0
+        r, g, b = colorsys.hsv_to_rgb(v, 1, v)
 
+        r *= 255
+        g *= 255
+        b *= 255
         """
         r = self.sine_norm(self.freqs["red"], clock_time, x)
         g = self.sine_norm(self.freqs["green"], clock_time, x)
         b = self.sine_norm(self.freqs["blue"], clock_time, x)
         """
-        r,g,b = v,v,v
         
         # weight colors
         r *= self.colors["red"] / 255

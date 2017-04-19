@@ -5,8 +5,6 @@ import time
 import flaschenwand
 import os
 
-# TODO rename to starter.py
-
 class Midi2Broker:
     """Receiving MIDI events and sending them to an MQTT broker."""
     
