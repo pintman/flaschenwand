@@ -98,6 +98,18 @@ Nach einer ersten Inbetriebnahme sind folgende Videos entstanden.
 Anschluss
 =========
 
+Pinout des Level-Shifters:
+
+          ┌─────────┐
+     1~OE ┤1 O    14├ Vcc
+     1A   ┤2      13├ 4~OE
+     1Y   ┤3      12├ 4A
+     2~OE ┤4      11├ 4Y
+     2A   ┤5      10├ 3~OE
+     2Y   ┤6       9├ 3A
+     GND  ┤7       8├ 3Y
+          └─────────┘
+
 Anschluss an den Pi (unten), das Netzteil (links), den Level-Shifter
 (Steckbrett mit dem 74AHC125 in der Mitte) und die LEDs (rechts).
 
