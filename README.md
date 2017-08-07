@@ -122,7 +122,7 @@ Zwei Kisten lassen sich auch nebeneinander anordnen.
 <img src="doc/flaschen_in_2_kisten.jpg" width="500">
 
 Der Pi kann ebenfalls über das Netzteil mit Strom versorgt werden. Dazu wird
-ein USB-Stecke mit der Stromversorgung und dieser mit dem Pi verbunden.
+ein USB-Stecker mit der Stromversorgung und dieser mit dem Pi verbunden.
 
 <img src="doc/Sketch2_Steckplatine.png" width="700">
 
