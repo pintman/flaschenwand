@@ -111,7 +111,9 @@ Pinout des Level-Shifters:
           └─────────┘
 
 Anschluss an den Pi (unten), das Netzteil (links), den Level-Shifter
-(Steckbrett mit dem 74AHC125 in der Mitte) und die LEDs (rechts).
+(Steckbrett mit dem 74AHC125 in der Mitte) und die LEDs (rechts). Die
+LEDs werden der Farben entsprechend verbunden: rot (+5V), blau (GND),
+weiß (DataIn).
 
 <img src="doc/Sketch_Steckplatine.png" width="700">
 
