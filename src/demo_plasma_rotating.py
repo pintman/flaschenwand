@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """Inspired by oldschool plasma demos.
 
 https://www.youtube.com/watch?v=QcyuYvyvOEI&t=3073s
