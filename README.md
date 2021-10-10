@@ -84,6 +84,8 @@ Im ACAB repo befinden sich diverse
 die auf LED-Displays mit geringer Auflösung (16x6) abgespielt werden
 können.
 
+Dass Projekt [WLED](https://kno.wled.ge/) nutzt für die Ansteuerung einen
+ESP8266 bzw. ESP32.
 
 Demo
 ====
