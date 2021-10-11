@@ -21,6 +21,8 @@ Bauteile
 
 WS2812B mit dem Controller WS2811 scheinen eine gute Lösung zu sein.
 
+![ws2811](doc/ws2811.jpg)
+
 Level-Shifter: 3V -> 5V
 
 [Adafruit](https://www.adafruit.com/products/1787)
