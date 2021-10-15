@@ -174,3 +174,11 @@ erfolgen.
 Eine Realisierung der Idee, LEDs mit Signalsteuerung zu kombinieren, zeigt das
 Video
 [NeoPixel Color Synthesis Experiments with Tony D! ](https://www.youtube.com/watch?v=rqRHkCA6TJ4).
+
+
+Links
+=====
+
+   * [1D Bubble Bobble](https://github.com/tomsrocket/1d-bobble)
+   * [1D shooter](https://github.com/Mashpoe/1D-Game)
+
