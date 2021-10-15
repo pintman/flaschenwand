@@ -179,6 +179,9 @@ Video
 Links
 =====
 
+Verschiedene Spiele, die in 1D-Welten spielen.
+
    * [1D Bubble Bobble](https://github.com/tomsrocket/1d-bobble)
    * [1D shooter](https://github.com/Mashpoe/1D-Game)
+   * [slightline](https://github.com/winterbeak/sightline) 
 
