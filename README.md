@@ -179,10 +179,11 @@ Video
 Links
 =====
 
-Verschiedene Spiele, die in 1D-Welten spielen.
+Verschiedene Spiele/Anwendungen, die in 1D-Welten spielen.
 
    * [1D Bubble Bobble](https://github.com/tomsrocket/1d-bobble)
    * [1D shooter](https://github.com/Mashpoe/1D-Game)
    * [slightline](https://github.com/winterbeak/sightline)
    * [1derlust](https://github.com/bobbykjack/1derlust)
+   * [self organising LEDs](https://github.com/atomic14/self-organising-leds)
 
