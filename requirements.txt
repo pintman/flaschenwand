@@ -1,3 +1,0 @@
-bottle
-python-osc
-rpi_ws281x
