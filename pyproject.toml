@@ -10,6 +10,9 @@ python = "^3.11"
 bottle = "^0.12.25"
 python-osc = "^1.8.3"
 rpi-ws281x = "^5.0.0"
+paho-mqtt = "^1.6.1"
+neopixel = "^0.0.1"
+python-rtmidi = "^1.5.6"
 
 
 [build-system]
